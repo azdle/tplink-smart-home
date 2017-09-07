@@ -1,0 +1,18 @@
+[package]
+name = "tplink-smart-home"
+version = "0.1.0"
+authors = ["Patrick Barrett <patrick@psbarrett.com>"]
+license = "MIT/Apache-2.0"
+repository = "https://github.com/azdle/tplink-smart-home"
+description = """
+Low-level protocol implementaion of the protocol used by tplink
+smart home devices, built on top of tokio-core.
+"""
+
+[dependencies]
+futures = "*"
+tokio-core = "*"
+env_logger = "*"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
