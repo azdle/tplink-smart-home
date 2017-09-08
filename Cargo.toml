@@ -10,6 +10,7 @@ smart home devices, built on top of tokio-core.
 """
 
 [dependencies]
+clap = "2.26.0"
 futures = "*"
 tokio-core = "*"
 env_logger = "*"
