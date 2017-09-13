@@ -29,6 +29,7 @@ fn make_request_wait_for_response(request: Message, device_addr: SocketAddr) -> 
     let src: SocketAddr = "0.0.0.0:0".parse().unwrap();
 
     let sock = UdpSocket::bind(&src, &handle).unwrap();
+    sock.set_broadcast(true).unwrap();
 
     let (mut sink, stream) = sock.framed(TplinkSmartHomeCodec).split();
 
