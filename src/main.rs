@@ -12,6 +12,8 @@ fn main() {
              .help("the IP address of a device")
              .required(true)
              .index(1))
+        .subcommand(SubCommand::with_name("sysinfo")
+                    .about("get device sysinfo"))
         .subcommand(SubCommand::with_name("on")
                     .about("turn on bulb"))
         .subcommand(SubCommand::with_name("off")
@@ -27,6 +29,8 @@ fn main() {
         tplink_smart_home::on(device_addr);
     } else if let Some(_matches) = matches.subcommand_matches("off") {
         tplink_smart_home::off(device_addr);
+    } else if let Some(_matches) = matches.subcommand_matches("sysinfo") {
+        tplink_smart_home::get_sysinfo(device_addr);
     } else {
         tplink_smart_home::get_details(device_addr);
     }

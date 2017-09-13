@@ -53,6 +53,15 @@ fn make_request_wait_for_response(request: Message, device_addr: SocketAddr) -> 
     response.unwrap()
 }
 
+pub fn get_sysinfo(device_addr: SocketAddr) {
+    let request =
+        Message::SystemMsg(
+            SystemMsg::GetSysinfo(None)
+        );
+
+    make_request_wait_for_response(request, device_addr);
+}
+
 pub fn get_details(device_addr: SocketAddr) {
     let request =
         Message::LightingServiceMsg(
