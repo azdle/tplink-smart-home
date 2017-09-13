@@ -26,7 +26,7 @@ fn make_request_wait_for_response(request: Message, device_addr: SocketAddr) -> 
     let mut core = Core::new().unwrap();
     let handle = core.handle();
 
-    let src: SocketAddr = "0.0.0.0:8675".parse().unwrap();
+    let src: SocketAddr = "0.0.0.0:0".parse().unwrap();
 
     let sock = UdpSocket::bind(&src, &handle).unwrap();
 
