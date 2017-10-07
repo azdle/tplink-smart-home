@@ -59,17 +59,21 @@ pub struct LightState {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "snake_case")]
 pub enum LightingServiceMsg {
-    #[serde(rename = "get_light_details")]
     GetLightDetails(Option<LightDetails>),
-    #[serde(rename = "transition_light_state")]
-    TransitionLightOnOff(TransitionLightOnOff),
-    #[serde(rename = "transition_light_state")]
     TransitionLightState(TransitionLightState),
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct TransitionLightState {
+#[serde(untagged)]
+pub enum TransitionLightState {
+    TransitionLightFull(TransitionLightFull),
+    TransitionLightOnOff(TransitionLightOnOff),
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TransitionLightFull {
     pub on_off: u8,
     pub error_code: u8
 }

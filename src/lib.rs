@@ -75,10 +75,12 @@ pub fn get_details(device_addr: SocketAddr) {
 pub fn on(device_addr: SocketAddr) {
     let request =
         Message::LightingServiceMsg(
-            LightingServiceMsg::TransitionLightOnOff(
-                TransitionLightOnOff{
-                    on_off: 1,
-                }
+            LightingServiceMsg::TransitionLightState(
+                TransitionLightState::TransitionLightOnOff(
+                    TransitionLightOnOff{
+                        on_off: 1,
+                    }
+                )
             )
         );
 
@@ -88,10 +90,12 @@ pub fn on(device_addr: SocketAddr) {
 pub fn off(device_addr: SocketAddr) {
     let request =
         Message::LightingServiceMsg(
-            LightingServiceMsg::TransitionLightOnOff(
-                TransitionLightOnOff{
-                    on_off: 0,
-                }
+            LightingServiceMsg::TransitionLightState(
+                TransitionLightState::TransitionLightOnOff(
+                    TransitionLightOnOff{
+                        on_off: 0,
+                    }
+                )
             )
         );
 
