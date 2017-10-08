@@ -92,6 +92,7 @@ pub enum LightMode {
 pub struct TransitionLightFull {
     pub on_off: u8,
     pub mode: LightMode,
+    pub color_temp: u16,
     pub hue: u16,
     pub saturation: u8,
     pub brightness: u8,
