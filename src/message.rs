@@ -56,6 +56,7 @@ pub struct LightState {
     saturation: u16,
     color_temp: u8,
     brightness: u8,
+    error_code: i64,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
