@@ -53,9 +53,9 @@ pub struct LightState {
     on_off: Option<u8>,
     mode: Option<String>,
     hue: u64,
-    saturation: u64,
-    color_temp: u64,
-    brightness: u64,
+    saturation: u16,
+    color_temp: u8,
+    brightness: u8,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -70,6 +70,7 @@ pub enum LightingServiceMsg {
 pub enum TransitionLightState {
     TransitionLightFull(TransitionLightFull),
     TransitionLightOnOff(TransitionLightOnOff),
+    TransitionLightHsv(TransitionLightHsv),
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -81,6 +82,14 @@ pub struct TransitionLightFull {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TransitionLightOnOff {
     pub on_off: u8,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TransitionLightHsv {
+    pub hue: u16,
+    pub saturation: u8,
+    pub brightness: u8,
+    pub on_off: u8
 }
 
 #[derive(Serialize, Deserialize, Debug)]

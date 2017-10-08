@@ -112,3 +112,21 @@ pub fn off(device_addr: SocketAddr) {
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1);
 }
+
+pub fn hsv(device_addr: SocketAddr, h: u16, s:u8, v: u8) {
+    let request =
+        Message::LightingServiceMsg(
+            LightingServiceMsg::TransitionLightState(
+                TransitionLightState::TransitionLightHsv(
+                    TransitionLightHsv{
+                        hue: h,
+                        saturation: s,
+                        brightness: v,
+                        on_off: 1
+                    }
+                )
+            )
+        );
+
+    make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1);
+}
