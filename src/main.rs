@@ -2,6 +2,19 @@ extern crate tplink_smart_home;
 extern crate clap;
 
 fn main() {
+    use std::io::{self, Write};
+    use std::process::exit;
+
+    match app() {
+        Ok(()) => (),
+        Err(e) => {
+            writeln!(io::stderr(), "error: {:?}", e).unwrap();
+            exit(1);
+        }
+    }
+}
+
+fn app() -> Result<(), std::io::Error> {
     use std::net::SocketAddr;
     use clap::{App, Arg, SubCommand};
     let matches = App::new(env!("CARGO_PKG_NAME"))
@@ -48,5 +61,7 @@ fn main() {
     } else {
         tplink_smart_home::get_details(device_addr);
     }
+
+    Ok(())
 }
 
