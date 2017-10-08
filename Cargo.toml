@@ -13,6 +13,7 @@ smart home devices, built on top of tokio-core.
 clap = "2.26.0"
 futures = "*"
 tokio-core = "*"
+tokio-timer = "*"
 env_logger = "*"
 serde = "1.0"
 serde_derive = "1.0"
