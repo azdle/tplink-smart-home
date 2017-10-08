@@ -124,7 +124,8 @@ pub fn hsv(device_addr: SocketAddr, h: u16, s:u8, v: u8) -> Result<Message, io::
                         hue: h,
                         saturation: s,
                         brightness: v,
-                        on_off: 1
+                        on_off: 1,
+                        color_temp: 0,
                     }
                 )
             )

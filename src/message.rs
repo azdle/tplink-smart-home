@@ -90,7 +90,8 @@ pub struct TransitionLightHsv {
     pub hue: u16,
     pub saturation: u8,
     pub brightness: u8,
-    pub on_off: u8
+    pub on_off: u8,
+    pub color_temp: u8,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
