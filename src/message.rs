@@ -71,6 +71,7 @@ pub enum TransitionLightState {
     TransitionLightFull(TransitionLightFull),
     TransitionLightOnOff(TransitionLightOnOff),
     TransitionLightHsv(TransitionLightHsv),
+    TransitionLightTemp(TransitionLightTemp),
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -90,6 +91,13 @@ pub struct TransitionLightHsv {
     pub saturation: u8,
     pub brightness: u8,
     pub on_off: u8
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TransitionLightTemp {
+    pub color_temp: u16,
+    pub brightness: u8,
+    pub on_off: u8,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

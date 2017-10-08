@@ -39,6 +39,12 @@ fn app() -> Result<(), std::io::Error> {
                          .required(true))
                     .arg(Arg::with_name("VALUE")
                          .required(true)))
+        .subcommand(SubCommand::with_name("temp")
+                    .about("set bulb color using color temperature")
+                    .arg(Arg::with_name("TEMPERATURE")
+                         .required(true))
+                    .arg(Arg::with_name("BRIGHTNESS")
+                         .required(true)))
         .get_matches();
 
     let device_addr_str = matches.value_of("DEVICE").unwrap();
@@ -56,6 +62,11 @@ fn app() -> Result<(), std::io::Error> {
         let v = matches.value_of("VALUE").unwrap().parse().unwrap();
 
         tplink_smart_home::hsv(device_addr, h, s, v)?;
+    } else if let Some(matches) = matches.subcommand_matches("temp") {
+        let t = matches.value_of("TEMPERATURE").unwrap().parse().unwrap();
+        let b = matches.value_of("BRIGHTNESS").unwrap().parse().unwrap();
+
+        tplink_smart_home::temp(device_addr, t, b)?;
     } else if let Some(_matches) = matches.subcommand_matches("sysinfo") {
         tplink_smart_home::get_sysinfo(device_addr)?;
     } else {
