@@ -69,16 +69,33 @@ pub enum LightingServiceMsg {
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(untagged)]
 pub enum TransitionLightState {
+    ErrorResponse(ErrorResponse),
     TransitionLightFull(TransitionLightFull),
-    TransitionLightOnOff(TransitionLightOnOff),
     TransitionLightHsv(TransitionLightHsv),
     TransitionLightTemp(TransitionLightTemp),
+    TransitionLightOnOff(TransitionLightOnOff),
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ErrorResponse {
+    pub err_code: i64,
+    pub err_msg: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "snake_case")]
+pub enum LightMode {
+    Normal,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TransitionLightFull {
     pub on_off: u8,
-    pub error_code: u8
+    pub mode: LightMode,
+    pub hue: u16,
+    pub saturation: u8,
+    pub brightness: u8,
+    pub err_code: u8
 }
 
 #[derive(Serialize, Deserialize, Debug)]
