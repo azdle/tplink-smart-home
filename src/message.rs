@@ -8,6 +8,73 @@ pub enum Message {
     LightingService(LightingService),
 }
 
+impl Message {
+    pub fn on() -> Message {
+        Message::LightingService(
+            LightingService::TransitionLightState(
+                TransitionLightState::TransitionLightOnOff(
+                    TransitionLightOnOff{
+                        on_off: 1,
+                    }
+                )
+            )
+        )
+    }
+
+    pub fn off() -> Message {
+        Message::LightingService(
+            LightingService::TransitionLightState(
+                TransitionLightState::TransitionLightOnOff(
+                    TransitionLightOnOff{
+                        on_off: 0,
+                    }
+                )
+            )
+        )
+    }
+
+    pub fn get_sys_info() -> Message {
+        Message::System(
+            System::GetSysinfo(None)
+        )
+    }
+
+    pub fn get_details() -> Message {
+        Message::LightingService(
+            LightingService::GetLightDetails(None)
+        )
+    }
+
+    pub fn hsv(h: u16, s: u8, v: u8) -> Message {
+        Message::LightingService(
+            LightingService::TransitionLightState(
+                TransitionLightState::TransitionLightHsv(
+                    TransitionLightHsv{
+                        hue: h,
+                        saturation: s,
+                        brightness: v,
+                        on_off: 1,
+                        color_temp: 0,
+                    }
+                )
+            )
+        )
+    }
+
+    pub fn temp(t: u16, b: u8) -> Message {
+        Message::LightingService(
+            LightingService::TransitionLightState(
+                TransitionLightState::TransitionLightTemp(
+                    TransitionLightTemp{
+                        color_temp: t,
+                        brightness: b,
+                        on_off: 1
+                    }
+                )
+            )
+        )
+    }
+
 #[derive(Serialize, Deserialize, Debug)]
 pub enum System {
     #[serde(rename = "get_sysinfo")]

@@ -68,85 +68,37 @@ fn make_request_wait_for_response(request: Message, device_addr: SocketAddr, wai
 }
 
 pub fn get_sysinfo(device_addr: SocketAddr) -> Result<Message, io::Error> {
-    let request =
-        Message::System(
-            System::GetSysinfo(None)
-        );
+    let request = Message::get_sys_info();
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
 }
 
 pub fn get_details(device_addr: SocketAddr) -> Result<Message, io::Error> {
-    let request =
-        Message::LightingService(
-            LightingService::GetLightDetails(None)
-        );
+    let request = Message::get_details();
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
 }
 
 pub fn on(device_addr: SocketAddr) -> Result<Message, io::Error> {
-    let request =
-        Message::LightingService(
-            LightingService::TransitionLightState(
-                TransitionLightState::TransitionLightOnOff(
-                    TransitionLightOnOff{
-                        on_off: 1,
-                    }
-                )
-            )
-        );
+    let request = Message::on();
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
 }
 
 pub fn off(device_addr: SocketAddr) -> Result<Message, io::Error> {
-    let request =
-        Message::LightingService(
-            LightingService::TransitionLightState(
-                TransitionLightState::TransitionLightOnOff(
-                    TransitionLightOnOff{
-                        on_off: 0,
-                    }
-                )
-            )
-        );
+    let request = Message::off();
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
 }
 
 pub fn hsv(device_addr: SocketAddr, h: u16, s:u8, v: u8) -> Result<Message, io::Error> {
-    let request =
-        Message::LightingService(
-            LightingService::TransitionLightState(
-                TransitionLightState::TransitionLightHsv(
-                    TransitionLightHsv{
-                        hue: h,
-                        saturation: s,
-                        brightness: v,
-                        on_off: 1,
-                        color_temp: 0,
-                    }
-                )
-            )
-        );
+    let request = Message::hsv(h, s, v);
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
 }
 
 pub fn temp(device_addr: SocketAddr, t: u16, b: u8) -> Result<Message, io::Error> {
-    let request =
-        Message::LightingService(
-            LightingService::TransitionLightState(
-                TransitionLightState::TransitionLightTemp(
-                    TransitionLightTemp{
-                        color_temp: t,
-                        brightness: b,
-                        on_off: 1
-                    }
-                )
-            )
-        );
+    let request = Message::temp(t, b);
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
 }
