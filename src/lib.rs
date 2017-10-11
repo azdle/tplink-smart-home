@@ -69,8 +69,8 @@ fn make_request_wait_for_response(request: Message, device_addr: SocketAddr, wai
 
 pub fn get_sysinfo(device_addr: SocketAddr) -> Result<Message, io::Error> {
     let request =
-        Message::SystemMsg(
-            SystemMsg::GetSysinfo(None)
+        Message::System(
+            System::GetSysinfo(None)
         );
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
@@ -78,8 +78,8 @@ pub fn get_sysinfo(device_addr: SocketAddr) -> Result<Message, io::Error> {
 
 pub fn get_details(device_addr: SocketAddr) -> Result<Message, io::Error> {
     let request =
-        Message::LightingServiceMsg(
-            LightingServiceMsg::GetLightDetails(None)
+        Message::LightingService(
+            LightingService::GetLightDetails(None)
         );
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
@@ -87,8 +87,8 @@ pub fn get_details(device_addr: SocketAddr) -> Result<Message, io::Error> {
 
 pub fn on(device_addr: SocketAddr) -> Result<Message, io::Error> {
     let request =
-        Message::LightingServiceMsg(
-            LightingServiceMsg::TransitionLightState(
+        Message::LightingService(
+            LightingService::TransitionLightState(
                 TransitionLightState::TransitionLightOnOff(
                     TransitionLightOnOff{
                         on_off: 1,
@@ -102,8 +102,8 @@ pub fn on(device_addr: SocketAddr) -> Result<Message, io::Error> {
 
 pub fn off(device_addr: SocketAddr) -> Result<Message, io::Error> {
     let request =
-        Message::LightingServiceMsg(
-            LightingServiceMsg::TransitionLightState(
+        Message::LightingService(
+            LightingService::TransitionLightState(
                 TransitionLightState::TransitionLightOnOff(
                     TransitionLightOnOff{
                         on_off: 0,
@@ -117,8 +117,8 @@ pub fn off(device_addr: SocketAddr) -> Result<Message, io::Error> {
 
 pub fn hsv(device_addr: SocketAddr, h: u16, s:u8, v: u8) -> Result<Message, io::Error> {
     let request =
-        Message::LightingServiceMsg(
-            LightingServiceMsg::TransitionLightState(
+        Message::LightingService(
+            LightingService::TransitionLightState(
                 TransitionLightState::TransitionLightHsv(
                     TransitionLightHsv{
                         hue: h,
@@ -136,8 +136,8 @@ pub fn hsv(device_addr: SocketAddr, h: u16, s:u8, v: u8) -> Result<Message, io::
 
 pub fn temp(device_addr: SocketAddr, t: u16, b: u8) -> Result<Message, io::Error> {
     let request =
-        Message::LightingServiceMsg(
-            LightingServiceMsg::TransitionLightState(
+        Message::LightingService(
+            LightingService::TransitionLightState(
                 TransitionLightState::TransitionLightTemp(
                     TransitionLightTemp{
                         color_temp: t,

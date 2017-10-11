@@ -3,13 +3,13 @@ use std::option::Option;
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Message {
     #[serde(rename = "system")]
-    SystemMsg(SystemMsg),
+    System(System),
     #[serde(rename = "smartlife.iot.smartbulb.lightingservice")]
-    LightingServiceMsg(LightingServiceMsg),
+    LightingService(LightingService),
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub enum SystemMsg {
+pub enum System {
     #[serde(rename = "get_sysinfo")]
     GetSysinfo(Option<SysInfo>),
 }
@@ -61,7 +61,7 @@ pub struct LightState {
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]
-pub enum LightingServiceMsg {
+pub enum LightingService {
     GetLightDetails(Option<LightDetails>),
     TransitionLightState(TransitionLightState),
 }
