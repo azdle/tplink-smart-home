@@ -75,6 +75,19 @@ impl Message {
         )
     }
 
+    pub fn circadian() -> Message {
+        Message::LightingService(
+            LightingService::TransitionLightState(
+                TransitionLightState::TransitionLightMode(
+                    TransitionLightMode{
+                        mode: LightMode::Circadian,
+                    }
+                )
+            )
+        )
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 pub enum System {
     #[serde(rename = "get_sysinfo")]
@@ -140,6 +153,7 @@ pub enum TransitionLightState {
     TransitionLightFull(TransitionLightFull),
     TransitionLightHsv(TransitionLightHsv),
     TransitionLightTemp(TransitionLightTemp),
+    TransitionLightMode(TransitionLightMode),
     TransitionLightOnOff(TransitionLightOnOff),
 }
 
@@ -153,6 +167,7 @@ pub struct ErrorResponse {
 #[serde(rename_all = "snake_case")]
 pub enum LightMode {
     Normal,
+    Circadian,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -165,6 +180,12 @@ pub struct TransitionLightFull {
     pub brightness: u8,
     pub err_code: u8
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TransitionLightMode {
+    pub mode: LightMode,
+}
+
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TransitionLightOnOff {

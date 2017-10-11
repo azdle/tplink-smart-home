@@ -45,6 +45,8 @@ fn app() -> Result<(), std::io::Error> {
                          .required(true))
                     .arg(Arg::with_name("BRIGHTNESS")
                          .required(true)))
+        .subcommand(SubCommand::with_name("circadian")
+                    .about("set bulb to circadian mode"))
         .get_matches();
 
     let device_addr_str = matches.value_of("DEVICE").unwrap();
@@ -67,6 +69,8 @@ fn app() -> Result<(), std::io::Error> {
         let b = matches.value_of("BRIGHTNESS").unwrap().parse().unwrap();
 
         tplink_smart_home::temp(device_addr, t, b)?;
+    } else if let Some(_matches) = matches.subcommand_matches("circadian") {
+        tplink_smart_home::circadian(device_addr)?;
     } else if let Some(_matches) = matches.subcommand_matches("sysinfo") {
         tplink_smart_home::get_sysinfo(device_addr)?;
     } else {

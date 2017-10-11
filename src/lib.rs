@@ -102,3 +102,9 @@ pub fn temp(device_addr: SocketAddr, t: u16, b: u8) -> Result<Message, io::Error
 
     make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
 }
+
+pub fn circadian(device_addr: SocketAddr) -> Result<Message, io::Error> {
+    let request = Message::circadian();
+
+    make_request_wait_for_response(request, device_addr, Duration::from_secs(3), 1)
+}
